@@ -4,6 +4,9 @@
   "installCommand": "npm install",
   "framework": "create-react-app",
   "outputDirectory": "build",
+  "env": {
+    "CI": "false"
+  },
   "builds": [
     {
       "src": "package.json",
