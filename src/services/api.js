@@ -7,12 +7,15 @@ const API_KEY = process.env.REACT_APP_MORALIS_API_KEY;
  * @param {number} limit - Number of results to return
  * @returns {Promise} Promise resolving to trending tokens data
  */
-// services/api.js
 export const getTrendingTokens = async (chain = "", limit = 100) => {
   try {
-    // Only add chain parameter if it's not empty
-    const chainParam = chain ? `&chain=${chain}` : "";
-    const url = `https://deep-index.moralis.io/api/v2.2/tokens/trending?limit=${limit}${chainParam}`;
+    let url;
+    if (chain === "solana") {
+      url = `https://solana-gateway.moralis.io/token/mainnet/trending?limit=${limit}`;
+    } else {
+      const chainParam = chain ? `&chain=${chain}` : "";
+      url = `https://deep-index.moralis.io/api/v2.2/tokens/trending?limit=${limit}${chainParam}`;
+    }
     console.log("Fetching trending tokens from:", url);
 
     const response = await fetch(url, {
@@ -23,11 +26,49 @@ export const getTrendingTokens = async (chain = "", limit = 100) => {
     });
 
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      console.error("API Error Response:", errorData);
+      throw new Error(`API error: ${response.status} - ${errorData.message || 'Unknown error'}`);
     }
 
     const data = await response.json();
-    return Array.isArray(data) ? data : data.result || [];
+    console.log("API Response Data:", data);
+
+    // Transform the data to match our expected format
+    const tokens = Array.isArray(data) ? data : (data.result || []);
+    return tokens.map(token => ({
+      chainId: token.chainId || chain,
+      tokenAddress: token.tokenAddress || token.address,
+      name: token.name,
+      symbol: token.symbol,
+      decimals: token.decimals,
+      logo: token.logo || token.thumbnail,
+      usdPrice: token.usdPrice || 0,
+      createdAt: token.createdAt || Math.floor(Date.now() / 1000 - 86400),
+      marketCap: parseFloat(token.marketCap || 0),
+      liquidityUsd: parseFloat(token.liquidityUsd || token.liquidity || 0),
+      pricePercentChange: {
+        "1h": (token.pricePercentChange?.["1h"] || token.price_change_24h || 0) / 100,
+        "4h": (token.pricePercentChange?.["4h"] || token.price_change_24h || 0) / 100,
+        "12h": (token.pricePercentChange?.["12h"] || token.price_change_24h || 0) / 100,
+        "24h": (token.pricePercentChange?.["24h"] || token.price_change_24h || 0) / 100
+      },
+      totalVolume: {
+        "1h": token.volumeUsd?.["1h"] || token.volume_24h || 0,
+        "4h": token.volumeUsd?.["4h"] || token.volume_24h || 0,
+        "12h": token.volumeUsd?.["12h"] || token.volume_24h || 0,
+        "24h": token.volumeUsd?.["24h"] || token.volume_24h || 0
+      },
+      transactions: {
+        "24h": token.transactions?.["24h"] || token.txns_24h || 0
+      },
+      buyers: {
+        "24h": token.buyers?.["24h"] || token.unique_buyers_24h || 0
+      },
+      sellers: {
+        "24h": token.sellers?.["24h"] || token.unique_sellers_24h || 0
+      }
+    }));
   } catch (error) {
     console.error("Error fetching trending tokens:", error);
     throw error;
