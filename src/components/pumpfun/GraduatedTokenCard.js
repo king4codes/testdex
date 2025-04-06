@@ -9,7 +9,7 @@ const GraduatedTokenCard = ({
 }) => {
   return (
     <div
-      className="bg-rs-card-bg border border-rs-gold/50 rounded-lg overflow-hidden cursor-pointer hover:border-rs-gold hover:brightness-110"
+      className="rs-button w-full cursor-pointer"
       onClick={onClick}
     >
       <div className="p-4">

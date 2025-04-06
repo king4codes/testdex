@@ -22,9 +22,9 @@ const NewTokenCard = ({
 
   return (
     <div
-      className={`bg-rs-card-bg border border-rs-gold/50 rounded-lg overflow-hidden cursor-pointer transition-all duration-500 transform ${
+      className={`rs-button w-full cursor-pointer transition-all duration-500 transform ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-      } hover:border-rs-gold hover:brightness-110 ${token.isNew ? "animate-pulse-gold" : ""}`}
+      } ${token.isNew ? "animate-pulse-gold" : ""}`}
       onClick={onClick}
     >
       <div className="p-4">

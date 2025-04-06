@@ -23,7 +23,7 @@ const LeftSidebar = ({ openSearchModal }) => {
               <span className="font-bold text-lg">Grand Exchange</span>
             </div>
             <span className="text-xs text-rs-text block mt-1">
-              Powered by Moralis
+              by Barron
             </span>
           </div>
         </Link>
