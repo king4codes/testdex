@@ -12,24 +12,24 @@ const TopBar = ({
 }) => {
   const navigate = useNavigate();
 
-  // Network buttons with their routes
+  // Network buttons with RuneScape-themed locations
   const networks = [
-    { id: "", name: "All Chains", icon: "🌐" },
-    { id: "solana", name: "Solana", icon: "🟣" },
-    { id: "ethereum", name: "Ethereum", icon: "🔷" },
-    { id: "base", name: "Base", icon: "🅱️" },
-    { id: "bsc", name: "BSC", icon: "🟡" },
-    { id: "ronin", name: "Ronin", icon: "🦊" },
+    { id: "", name: "All Realms", icon: "🌍" },
+    { id: "solana", name: "Lumbridge", icon: "🏰" },
+    { id: "ethereum", name: "Varrock", icon: "🏛️" },
+    { id: "base", name: "Falador", icon: "⚔️" },
+    { id: "bsc", name: "Al Kharid", icon: "🏜️" },
+    { id: "ronin", name: "Draynor", icon: "🌳" },
   ];
 
-  // Page navigation buttons
+  // Page navigation buttons with RuneScape theme
   const pages = [
-    { id: "portfolio", name: "Portfolio", icon: "💼" },
-    { id: "pumpfun", name: "Pump.fun", icon: "🚀" },
+    { id: "portfolio", name: "Bank", icon: "💰" },
+    { id: "pumpfun", name: "Grand Exchange", icon: "🏪" },
   ];
 
   return (
-    <div className="bg-dex-bg-secondary border-b border-dex-border p-4 sticky top-0 z-10">
+    <div className="bg-rs-card-bg border-b border-rs-gold/50 p-4 sticky top-0 z-10">
       <div className="flex items-center justify-between flex-wrap gap-3">
         {/* Network buttons */}
         <div className="flex items-center flex-wrap gap-2">
@@ -40,8 +40,8 @@ const TopBar = ({
                 className={`flex items-center px-3 py-2 rounded text-sm ${
                   (network.id === "" && chainId === undefined) ||
                   chainId === network.id
-                    ? "bg-dex-blue text-white"
-                    : "bg-dex-bg-tertiary text-dex-text-primary hover:bg-dex-bg-highlight"
+                    ? "bg-rs-gold/20 border border-rs-gold text-rs-gold"
+                    : "bg-rs-card-bg border border-rs-gold/50 text-rs-text hover:border-rs-gold hover:text-rs-gold"
                 }`}
                 onClick={() => navigate(`/${network.id}`)}
               >
@@ -52,13 +52,13 @@ const TopBar = ({
           </div>
         </div>
 
-        {/* Page navigation buttons - now centered */}
+        {/* Page navigation buttons - centered */}
         <div className="flex items-center justify-center">
           <div className="flex space-x-2">
             {pages.map((page) => (
               <button
                 key={page.id}
-                className="flex items-center bg-dex-bg-tertiary hover:bg-dex-bg-highlight text-dex-text-primary rounded px-3 py-2 text-sm"
+                className="flex items-center bg-rs-card-bg border border-rs-gold/50 text-rs-text hover:border-rs-gold hover:text-rs-gold rounded px-3 py-2 text-sm"
                 onClick={() => navigate(`/${page.id}`)}
               >
                 <span className="mr-1">{page.icon}</span>
