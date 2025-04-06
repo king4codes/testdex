@@ -100,79 +100,82 @@ const SearchModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-black bg-opacity-80"
-      onClick={onClose}
-    >
+    <div className="rs-modal-overlay">
       <div
-        className="bg-dex-bg-secondary rounded-lg w-full max-w-3xl max-h-[80vh] overflow-hidden"
+        ref={modalRef}
+        className="rs-modal w-full max-w-3xl max-h-[80vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-4 border-b border-dex-border">
-          <div className="flex items-center">
-            <div className="flex-1 flex items-center bg-dex-bg-primary rounded-lg px-3 py-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-dex-text-secondary mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <input
-                ref={inputRef}
-                type="text"
-                placeholder="Search for tokens (e.g. ETH, BTC, PEPE)"
-                className="bg-transparent w-full focus:outline-none text-dex-text-primary"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+        <div className="rs-modal-header flex items-center justify-between">
+          <h2 className="text-lg">Grand Exchange Search</h2>
+          <button onClick={onClose} className="rs-modal-close">×</button>
+        </div>
+        
+        <div className="p-4">
+          <div className="rs-input flex items-center w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-rs-text mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
+            </svg>
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Search for items (e.g. Dragon Bones, Rune Scimitar)"
+              className="bg-transparent w-full focus:outline-none text-rs-text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
 
-              {searchTerm && (
-                <button
-                  onClick={() => setSearchTerm("")}
-                  className="text-dex-text-secondary"
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className="text-rs-text hover:text-rs-gold transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              )}
-            </div>
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
-        <div className="overflow-y-auto max-h-[calc(80vh-70px)]">
+
+        <div className="overflow-y-auto max-h-[calc(80vh-140px)]">
           {searchTerm.trim() ? (
             loading ? (
-              <div className="p-4 text-center text-dex-text-secondary">
-                Searching...
+              <div className="p-4 flex items-center justify-center">
+                <div className="rs-loading"></div>
+                <span className="ml-3 text-rs-text">Searching the Grand Exchange...</span>
               </div>
             ) : (
               <SearchResults results={results} onClose={onClose} />
             )
           ) : (
             <div>
-              <div className="p-4 border-b border-dex-border">
-                <h3 className="text-dex-text-primary font-medium">
-                  Trending Tokens
+              <div className="p-4 border-b border-rs-gold">
+                <h3 className="text-rs-text font-medium">
+                  Popular Items
                 </h3>
-                <p className="text-dex-text-secondary text-sm">
-                  Popular tokens right now
+                <p className="text-rs-light-brown text-sm">
+                  Hot items in the Grand Exchange
                 </p>
               </div>
               <SearchResults results={trendingTokens} onClose={onClose} />

@@ -4,83 +4,89 @@ const TableHeader = ({ sortBy, sortDirection, onSortChange }) => {
   const renderSortIcon = (column) => {
     if (sortBy !== column) return null;
 
-    return <span className="ml-1">{sortDirection === "asc" ? "↑" : "↓"}</span>;
+    return (
+      <span className="ml-1 inline-block">
+        {sortDirection === "asc" ? "⬆️" : "⬇️"}
+      </span>
+    );
   };
+
+  const headerClass = "sticky top-0 px-4 py-3 cursor-pointer hover:brightness-125 transition-all";
 
   return (
     <thead>
-      <tr className="text-xs uppercase text-dex-text-secondary border-b border-dex-border">
-        <th className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-left">
+      <tr>
+        <th className={`${headerClass} text-left`}>
           #
         </th>
-        <th className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-left">
-          TOKEN
+        <th className={`${headerClass} text-left`}>
+          ITEM
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("usdPrice")}
         >
           PRICE {renderSortIcon("usdPrice")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("createdAt")}
         >
           AGE {renderSortIcon("createdAt")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("transactions.oneDay")}
         >
-          TXNS {renderSortIcon("transactions.oneDay")}
+          TRADES {renderSortIcon("transactions.oneDay")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("volumeUsd.oneDay")}
         >
           VOLUME {renderSortIcon("volumeUsd.oneDay")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("buyers.oneDay")}
         >
-          MAKERS {renderSortIcon("buyers.oneDay")}
+          MERCHANTS {renderSortIcon("buyers.oneDay")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("usdPricePercentChange.5m")}
         >
           5M {renderSortIcon("usdPricePercentChange.5m")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("usdPricePercentChange.oneHour")}
         >
           1H {renderSortIcon("usdPricePercentChange.oneHour")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("usdPricePercentChange.sixHour")}
         >
           6H {renderSortIcon("usdPricePercentChange.sixHour")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("usdPricePercentChange.oneDay")}
         >
           24H {renderSortIcon("usdPricePercentChange.oneDay")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("liquidityUsd")}
         >
-          LIQUIDITY {renderSortIcon("liquidityUsd")}
+          STOCK {renderSortIcon("liquidityUsd")}
         </th>
         <th
-          className="sticky top-0 bg-dex-bg-primary px-4 py-3 text-right cursor-pointer"
+          className={`${headerClass} text-right`}
           onClick={() => onSortChange("marketCap")}
         >
-          MCAP {renderSortIcon("marketCap")}
+          VALUE {renderSortIcon("marketCap")}
         </th>
       </tr>
     </thead>

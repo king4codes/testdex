@@ -64,47 +64,50 @@ const TokenRow = ({ token, rank }) => {
   return (
     <tr
       onClick={handleTokenClick}
-      className="cursor-pointer hover:bg-dex-bg-highlight"
+      className="hover:bg-rs-brown transition-colors cursor-pointer"
     >
-      <td className="px-4 py-3 text-dex-text-tertiary text-center">{rank}</td>
+      <td className="px-4 py-3 text-center">{rank}</td>
       <td className="px-4 py-3">
         <Link
           to={`/${getChainPath(token.chainId)}/${token.tokenAddress}`}
           className="flex items-center"
           onClick={(e) => {
-            // Prevent event propagation to avoid conflict with the row click handler
             e.stopPropagation();
           }}
         >
           <div className="flex items-center">
-            <img
-              src={token.logo || "/images/tokens/default-token.svg"}
-              alt={token.symbol}
-              className="w-8 h-8 rounded-full mr-3 bg-dex-bg-tertiary"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEwMCIgZmlsbD0iIzM0Mzk0NyIvPjwvc3ZnPg==";
-              }}
-            />
+            <div className="rs-inventory-slot mr-3">
+              <img
+                src={token.logo || "/images/tokens/default-token.svg"}
+                alt={token.symbol}
+                className="w-6 h-6"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEwMCIgZmlsbD0iIzM0Mzk0NyIvPjwvc3ZnPg==";
+                }}
+              />
+            </div>
             <div>
-              <div className="font-medium text-dex-text-primary flex items-center">
+              <div className="font-medium text-rs-text flex items-center">
                 <span>{token.symbol}</span>
                 {token.lightning && (
-                  <span className="ml-2 text-yellow-400 text-xs">
+                  <span className="ml-2 text-rs-gold text-xs">
                     ⚡{token.lightning}
                   </span>
                 )}
               </div>
-              <div className="text-xs text-dex-text-secondary">
+              <div className="text-xs text-rs-light-brown">
                 {token.name}
               </div>
             </div>
           </div>
         </Link>
       </td>
-      <td className="px-4 py-3 text-right">${formatPrice(token.usdPrice)}</td>
-      <td className="px-4 py-3 text-right text-dex-text-secondary">
+      <td className="px-4 py-3 text-right font-bold text-rs-gold">
+        ${formatPrice(token.usdPrice)}
+      </td>
+      <td className="px-4 py-3 text-right text-rs-light-brown">
         {formatAge(token.createdAt * 1000)}
       </td>
       <td className="px-4 py-3 text-right">
@@ -137,10 +140,12 @@ const TokenRow = ({ token, rank }) => {
         }
       />
 
-      <td className="px-4 py-3 text-right">
+      <td className="px-4 py-3 text-right text-rs-text">
         ${formatNumber(token.liquidityUsd)}
       </td>
-      <td className="px-4 py-3 text-right">${formatNumber(token.marketCap)}</td>
+      <td className="px-4 py-3 text-right text-rs-text">
+        ${formatNumber(token.marketCap)}
+      </td>
     </tr>
   );
 };
@@ -148,8 +153,8 @@ const TokenRow = ({ token, rank }) => {
 const PriceChangeCell = ({ value }) => (
   <td
     className={`px-4 py-3 text-right ${
-      value >= 0 ? "text-green-500" : "text-red-500"
-    }`}
+      value >= 0 ? "text-green-400" : "text-red-400"
+    } font-bold`}
   >
     {value ? `${value >= 0 ? "+" : ""}${(value * 100).toFixed(2)}%` : "-"}
   </td>

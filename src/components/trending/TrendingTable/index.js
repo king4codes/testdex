@@ -55,8 +55,11 @@ const TrendingTable = ({
   }
 
   return (
-    <div className="flex-1 overflow-x-auto">
-      <table className="w-full border-collapse">
+    <div className="rs-card flex-1 overflow-x-auto">
+      <div className="rs-card-header mb-4">
+        <h2 className="text-lg">Grand Exchange Market Trends</h2>
+      </div>
+      <table className="rs-table w-full">
         <TableHeader
           sortBy={sortBy}
           sortDirection={sortDirection}
@@ -65,20 +68,19 @@ const TrendingTable = ({
         <tbody>
           {loading ? (
             <tr>
-              <td
-                colSpan="12"
-                className="text-center py-8 text-dex-text-secondary"
-              >
-                Loading trending tokens...
+              <td colSpan="12" className="text-center py-8">
+                <div className="flex items-center justify-center">
+                  <div className="rs-loading mr-3"></div>
+                  <span>Fetching market prices...</span>
+                </div>
               </td>
             </tr>
           ) : sortedTokens.length === 0 ? (
             <tr>
-              <td
-                colSpan="12"
-                className="text-center py-8 text-dex-text-secondary"
-              >
-                No tokens found
+              <td colSpan="12" className="text-center py-8">
+                <div className="rs-alert rs-alert-warning">
+                  No items found in the Grand Exchange
+                </div>
               </td>
             </tr>
           ) : (
