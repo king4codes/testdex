@@ -206,28 +206,28 @@ const PumpFunPage = () => {
       bondingTokens.length === 0 &&
       graduatedTokens.length === 0 ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rs-gold"></div>
-          <span className="text-rs-text ml-3">Loading items from the Grand Exchange...</span>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-dex-blue"></div>
+          <span className="text-dex-text-primary ml-3">Loading tokens...</span>
         </div>
       ) : error ? (
-        <div className="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded">
+        <div className="text-dex-red text-sm p-4 rounded">
           {error}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* New Tokens Column */}
           <div>
-            <div className="bg-rs-card-bg border border-rs-gold/50 rounded-lg p-4 mb-4">
+            <div className="bg-dex-bg-secondary rounded-lg p-4 mb-4">
               <h2 className="text-xl font-semibold text-rs-text flex items-center">
                 <span className="mr-2">🏺</span> Fresh Stock
                 <span className="text-xs text-rs-light-brown ml-2">by Barron</span>
               </h2>
             </div>
 
-            <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2">
+            <div className="space-y-4">
               {newTokens.length === 0 ? (
-                <div className="text-center py-10 text-rs-light-brown">
-                  No new items in stock
+                <div className="text-center py-10 text-dex-text-secondary">
+                  No new tokens found
                 </div>
               ) : (
                 newTokens.map((token) => (
@@ -246,17 +246,17 @@ const PumpFunPage = () => {
 
           {/* Bonding Tokens Column */}
           <div>
-            <div className="bg-rs-card-bg border border-rs-gold/50 rounded-lg p-4 mb-4">
+            <div className="bg-dex-bg-secondary rounded-lg p-4 mb-4">
               <h2 className="text-xl font-semibold text-rs-text flex items-center">
                 <span className="mr-2">⚒️</span> Crafting Items
                 <span className="text-xs text-rs-light-brown ml-2">by Barron</span>
               </h2>
             </div>
 
-            <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2">
+            <div className="space-y-4">
               {bondingTokens.length === 0 ? (
-                <div className="text-center py-10 text-rs-light-brown">
-                  No items being crafted
+                <div className="text-center py-10 text-dex-text-secondary">
+                  No bonding tokens found
                 </div>
               ) : (
                 bondingTokens.map((token) => (
@@ -274,17 +274,17 @@ const PumpFunPage = () => {
 
           {/* Graduated Tokens Column */}
           <div>
-            <div className="bg-rs-card-bg border border-rs-gold/50 rounded-lg p-4 mb-4">
+            <div className="bg-dex-bg-secondary rounded-lg p-4 mb-4">
               <h2 className="text-xl font-semibold text-rs-text flex items-center">
                 <span className="mr-2">🏆</span> Legendary Items
                 <span className="text-xs text-rs-light-brown ml-2">by Barron</span>
               </h2>
             </div>
 
-            <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2">
+            <div className="space-y-4">
               {graduatedTokens.length === 0 ? (
-                <div className="text-center py-10 text-rs-light-brown">
-                  No legendary items available
+                <div className="text-center py-10 text-dex-text-secondary">
+                  No graduated tokens found
                 </div>
               ) : (
                 graduatedTokens.map((token) => (
