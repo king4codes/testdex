@@ -206,26 +206,28 @@ const PumpFunPage = () => {
       bondingTokens.length === 0 &&
       graduatedTokens.length === 0 ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+          <div className="rs-loading"></div>
+          <span className="text-rs-text ml-3">Searching the Grand Exchange...</span>
         </div>
       ) : error ? (
-        <div className="bg-red-900/30 border border-red-500 text-red-400 px-4 py-3 rounded-lg">
+        <div className="rs-alert rs-alert-error">
           {error}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* New Tokens Column */}
           <div className="space-y-4">
-            <div className="bg-dex-bg-secondary rounded-t-lg p-4 border-b-2 border-green-500">
-              <h2 className="text-xl font-semibold text-white flex items-center">
-                <span className="mr-2">🆕</span> Newly Created Tokens
+            <div className="rs-card-header border-b-2 border-rs-gold">
+              <h2 className="text-xl font-semibold text-rs-text flex items-center">
+                <span className="mr-2">🏺</span> Fresh Stock
+                <span className="text-xs text-rs-light-brown ml-2">by Barron</span>
               </h2>
             </div>
 
-            <div className="space-y-4 max-h-[80vh] overflow-y-auto p-2">
+            <div className="space-y-4 max-h-[80vh] overflow-y-auto p-2 rs-scrollbar">
               {newTokens.length === 0 ? (
-                <div className="text-center py-10 text-dex-text-secondary">
-                  No new tokens available
+                <div className="text-center py-10 text-rs-light-brown">
+                  No new items in stock
                 </div>
               ) : (
                 newTokens.map((token) => (
@@ -244,16 +246,17 @@ const PumpFunPage = () => {
 
           {/* Bonding Tokens Column */}
           <div className="space-y-4">
-            <div className="bg-dex-bg-secondary rounded-t-lg p-4 border-b-2 border-blue-500">
-              <h2 className="text-xl font-semibold text-white flex items-center">
-                <span className="mr-2">⚡</span> Bonding Tokens
+            <div className="rs-card-header border-b-2 border-rs-gold">
+              <h2 className="text-xl font-semibold text-rs-text flex items-center">
+                <span className="mr-2">⚒️</span> Crafting Items
+                <span className="text-xs text-rs-light-brown ml-2">by Barron</span>
               </h2>
             </div>
 
-            <div className="space-y-4 max-h-[80vh] overflow-y-auto p-2">
+            <div className="space-y-4 max-h-[80vh] overflow-y-auto p-2 rs-scrollbar">
               {bondingTokens.length === 0 ? (
-                <div className="text-center py-10 text-dex-text-secondary">
-                  No bonding tokens available
+                <div className="text-center py-10 text-rs-light-brown">
+                  No items being crafted
                 </div>
               ) : (
                 bondingTokens.map((token) => (
@@ -271,16 +274,17 @@ const PumpFunPage = () => {
 
           {/* Graduated Tokens Column */}
           <div className="space-y-4">
-            <div className="bg-dex-bg-secondary rounded-t-lg p-4 border-b-2 border-purple-500">
-              <h2 className="text-xl font-semibold text-white flex items-center">
-                <span className="mr-2">🎓</span> Graduated Tokens
+            <div className="rs-card-header border-b-2 border-rs-gold">
+              <h2 className="text-xl font-semibold text-rs-text flex items-center">
+                <span className="mr-2">🏆</span> Legendary Items
+                <span className="text-xs text-rs-light-brown ml-2">by Barron</span>
               </h2>
             </div>
 
-            <div className="space-y-4 max-h-[80vh] overflow-y-auto p-2">
+            <div className="space-y-4 max-h-[80vh] overflow-y-auto p-2 rs-scrollbar">
               {graduatedTokens.length === 0 ? (
-                <div className="text-center py-10 text-dex-text-secondary">
-                  No graduated tokens available
+                <div className="text-center py-10 text-rs-light-brown">
+                  No legendary items available
                 </div>
               ) : (
                 graduatedTokens.map((token) => (

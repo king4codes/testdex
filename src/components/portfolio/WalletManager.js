@@ -50,35 +50,40 @@ const WalletManager = ({
   };
 
   return (
-    <div className="bg-dex-bg-secondary rounded-lg p-4">
-      <h2 className="text-lg font-medium mb-4">Your Wallets</h2>
+    <div className="rs-card">
+      <div className="rs-card-header border-b-2 border-rs-gold">
+        <h2 className="text-xl font-semibold text-rs-text flex items-center">
+          <span className="mr-2">🎒</span> Your Inventory
+          <span className="text-xs text-rs-light-brown ml-2">by Barron</span>
+        </h2>
+      </div>
 
       {/* Wallet list */}
-      <div className="mb-6">
+      <div className="p-4">
         {wallets.length === 0 ? (
-          <div className="text-dex-text-secondary text-center py-4">
-            No wallets added yet
+          <div className="text-rs-light-brown text-center py-4">
+            No adventurers registered
           </div>
         ) : (
           <div className="space-y-2">
             {wallets.map((wallet) => (
               <div
                 key={wallet.address}
-                className={`flex items-center justify-between p-3 rounded cursor-pointer ${
+                className={`rs-button flex items-center justify-between p-3 cursor-pointer ${
                   selectedWallet && selectedWallet.address === wallet.address
-                    ? "bg-dex-bg-highlight"
-                    : "hover:bg-dex-bg-tertiary"
+                    ? "brightness-110"
+                    : ""
                 }`}
                 onClick={() => onSelectWallet(wallet)}
               >
                 <div className="flex-1">
-                  <div className="font-medium">{wallet.name}</div>
-                  <div className="text-xs text-dex-text-secondary truncate">
+                  <div className="font-medium text-rs-text">{wallet.name}</div>
+                  <div className="text-xs text-rs-light-brown truncate">
                     {wallet.address}
                   </div>
                 </div>
                 <button
-                  className="text-dex-text-tertiary hover:text-dex-red p-1 rounded"
+                  className="text-rs-light-brown hover:text-red-400 p-1 rounded"
                   onClick={(e) => {
                     e.stopPropagation();
                     onRemoveWallet(wallet.address);
@@ -104,42 +109,42 @@ const WalletManager = ({
       </div>
 
       {/* Add new wallet form */}
-      <div className="border-t border-dex-border pt-4">
-        <h3 className="text-sm font-medium mb-2">Add New Wallet</h3>
+      <div className="p-4 border-t border-rs-border">
+        <h3 className="text-rs-text font-medium mb-2">Register New Adventurer</h3>
 
-        {error && <div className="text-dex-red text-sm mb-2">{error}</div>}
+        {error && <div className="rs-alert rs-alert-error mb-2">{error}</div>}
 
         <div className="mb-3">
-          <label className="block text-xs text-dex-text-secondary mb-1">
-            Wallet Name
+          <label className="block text-xs text-rs-light-brown mb-1">
+            Adventurer Name
           </label>
           <input
             type="text"
             value={newWalletName}
             onChange={(e) => setNewWalletName(e.target.value)}
-            placeholder="Main Wallet"
-            className="w-full bg-dex-bg-tertiary border border-dex-border rounded p-2 text-dex-text-primary"
+            placeholder="Main Account"
+            className="rs-input w-full"
           />
         </div>
 
         <div className="mb-3">
-          <label className="block text-xs text-dex-text-secondary mb-1">
-            Wallet Address
+          <label className="block text-xs text-rs-light-brown mb-1">
+            Adventurer Address
           </label>
           <input
             type="text"
             value={newWalletAddress}
             onChange={(e) => setNewWalletAddress(e.target.value)}
             placeholder="0x..."
-            className="w-full bg-dex-bg-tertiary border border-dex-border rounded p-2 text-dex-text-primary"
+            className="rs-input w-full"
           />
         </div>
 
         <button
           onClick={handleAddWallet}
-          className="w-full bg-dex-blue hover:bg-blue-600 text-white rounded py-2"
+          className="rs-button w-full py-2"
         >
-          Add Wallet
+          Register Adventurer
         </button>
       </div>
     </div>
