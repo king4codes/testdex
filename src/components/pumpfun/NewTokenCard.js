@@ -22,19 +22,19 @@ const NewTokenCard = ({
 
   return (
     <div
-      className={`bg-dex-bg-secondary rounded-lg overflow-hidden border border-dex-border cursor-pointer transition-all duration-500 transform ${
+      className={`bg-rs-card-bg border border-rs-gold/50 rounded-lg overflow-hidden cursor-pointer transition-all duration-500 transform ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-      } hover:border-green-500 ${token.isNew ? "animate-pulse-green" : ""}`}
+      } hover:border-rs-gold hover:brightness-110 ${token.isNew ? "animate-pulse-gold" : ""}`}
       onClick={onClick}
     >
       <div className="p-4">
         <div className="flex items-center mb-3">
-          <div className="h-10 w-10 rounded-full bg-green-800 mr-3 flex items-center justify-center overflow-hidden">
+          <div className="h-12 w-12 rs-inventory-slot mr-3 flex items-center justify-center overflow-hidden">
             {token.logo ? (
               <img
                 src={token.logo}
                 alt={token.symbol}
-                className="h-full w-full object-cover"
+                className="h-10 w-10 object-cover"
                 onError={(e) => {
                   e.target.onError = null;
                   e.target.src =
@@ -42,48 +42,49 @@ const NewTokenCard = ({
                 }}
               />
             ) : (
-              <span className="text-white font-bold">
+              <span className="text-rs-gold font-bold">
                 {token.symbol ? token.symbol.charAt(0) : "?"}
               </span>
             )}
           </div>
           <div>
-            <h3 className="font-bold text-white">{token.symbol}</h3>
-            <p className="text-sm text-dex-text-secondary truncate max-w-[200px]">
+            <h3 className="font-bold text-rs-gold">{token.symbol}</h3>
+            <p className="text-sm text-rs-light-brown truncate max-w-[200px]">
               {token.name}
+              <span className="text-xs ml-1">by Barron</span>
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2 mb-3">
           <div>
-            <p className="text-xs text-dex-text-secondary">Price</p>
-            <p className="font-medium text-white">
+            <p className="text-xs text-rs-light-brown">Price</p>
+            <p className="font-medium text-rs-text">
               {formatPrice(token.priceUsd)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-dex-text-secondary">Liquidity</p>
-            <p className="font-medium text-white">
+            <p className="text-xs text-rs-light-brown">Liquidity</p>
+            <p className="font-medium text-rs-text">
               {formatNumber(token.liquidity)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-dex-text-secondary">FDV</p>
-            <p className="font-medium text-white">
+            <p className="text-xs text-rs-light-brown">FDV</p>
+            <p className="font-medium text-rs-text">
               {formatNumber(token.fullyDilutedValuation)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-dex-text-secondary">Created</p>
-            <p className="font-medium text-white">
+            <p className="text-xs text-rs-light-brown">Created</p>
+            <p className="font-medium text-rs-text">
               {formatTimeAgo(token.createdAt)}
             </p>
           </div>
         </div>
 
-        <div className="text-xs bg-green-900/30 text-green-400 py-1 px-2 rounded-full inline-block">
-          New Token
+        <div className="text-xs bg-rs-gold/10 text-rs-gold py-1 px-2 rounded-full inline-block border border-rs-gold/50">
+          Fresh Stock
         </div>
       </div>
     </div>

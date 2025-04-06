@@ -9,66 +9,67 @@ const GraduatedTokenCard = ({
 }) => {
   return (
     <div
-      className="bg-dex-bg-secondary rounded-lg overflow-hidden border border-dex-border cursor-pointer transition-all hover:border-purple-500"
+      className="bg-rs-card-bg border border-rs-gold/50 rounded-lg overflow-hidden cursor-pointer hover:border-rs-gold hover:brightness-110"
       onClick={onClick}
     >
       <div className="p-4">
         <div className="flex items-center mb-3">
-          <div className="h-10 w-10 rounded-full bg-purple-800 mr-3 flex items-center justify-center overflow-hidden">
+          <div className="h-12 w-12 rs-inventory-slot mr-3 flex items-center justify-center overflow-hidden">
             {token.logo ? (
               <img
                 src={token.logo}
                 alt={token.symbol}
-                className="h-full w-full object-cover"
+                className="h-10 w-10 object-cover"
                 onError={(e) => {
                   e.target.onError = null;
                   e.target.src =
-                    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEwMCIgZmlsbD0iIzQzMmE3NCIvPjwvc3ZnPg==";
+                    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEwMCIgZmlsbD0iIzJmNGEyNSIvPjwvc3ZnPg==";
                 }}
               />
             ) : (
-              <span className="text-white font-bold">
+              <span className="text-rs-gold font-bold">
                 {token.symbol ? token.symbol.charAt(0) : "?"}
               </span>
             )}
           </div>
           <div>
-            <h3 className="font-bold text-white">{token.symbol}</h3>
-            <p className="text-sm text-dex-text-secondary truncate max-w-[200px]">
+            <h3 className="font-bold text-rs-gold">{token.symbol}</h3>
+            <p className="text-sm text-rs-light-brown truncate max-w-[200px]">
               {token.name}
+              <span className="text-xs ml-1">by Barron</span>
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-2 mb-3">
           <div>
-            <p className="text-xs text-dex-text-secondary">Price</p>
-            <p className="font-medium text-white">
+            <p className="text-xs text-rs-light-brown">Price</p>
+            <p className="font-medium text-rs-text">
               {formatPrice(token.priceUsd)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-dex-text-secondary">Liquidity</p>
-            <p className="font-medium text-white">
+            <p className="text-xs text-rs-light-brown">Liquidity</p>
+            <p className="font-medium text-rs-text">
               {formatNumber(token.liquidity)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-dex-text-secondary">FDV</p>
-            <p className="font-medium text-white">
-              {formatNumber(token.fullyDilutedValuation)}
+            <p className="text-xs text-rs-light-brown">Market Cap</p>
+            <p className="font-medium text-rs-text">
+              {formatNumber(token.marketCap)}
             </p>
           </div>
           <div>
-            <p className="text-xs text-dex-text-secondary">Graduated</p>
-            <p className="font-medium text-white">
+            <p className="text-xs text-rs-light-brown">Graduated</p>
+            <p className="font-medium text-rs-text">
               {formatTimeAgo(token.graduatedAt)}
             </p>
           </div>
         </div>
 
-        <div className="text-xs bg-purple-900/30 text-purple-400 py-1 px-2 rounded-full inline-block">
-          Graduated Token
+        <div className="text-xs bg-rs-gold/10 text-rs-gold py-1 px-2 rounded-full inline-block border border-rs-gold/50">
+          Legendary Item
         </div>
       </div>
     </div>
