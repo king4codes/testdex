@@ -4,7 +4,7 @@ import NewTokenCard from "../components/pumpfun/NewTokenCard";
 import BondingTokenCard from "../components/pumpfun/BondingTokenCard";
 import GraduatedTokenCard from "../components/pumpfun/GraduatedTokenCard";
 
-const API_KEY = process.env.REACT_APP_MORALIS_API_KEY;
+const API_BASE_URL = "https://api.pump.fun";
 
 const PumpFunPage = () => {
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ const PumpFunPage = () => {
   const fetchAllTokens = async () => {
     setLoading(true);
     try {
+      console.log("Starting to fetch all tokens...");
       await Promise.all([
         fetchNewTokens(),
         fetchBondingTokens(),
@@ -40,7 +41,7 @@ const PumpFunPage = () => {
       ]);
     } catch (err) {
       console.error("Error fetching pump.fun tokens:", err);
-      setError("Failed to load pump.fun tokens. Please try again.");
+      setError(`Failed to load pump.fun tokens: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -48,31 +49,23 @@ const PumpFunPage = () => {
 
   const fetchNewTokens = async () => {
     try {
-      const url =
-        "https://solana-gateway.moralis.io/token/mainnet/exchange/pumpfun/new?limit=100";
-      const response = await fetch(url, {
-        headers: {
-          accept: "application/json",
-          "X-API-Key": API_KEY,
-        },
-      });
+      console.log("Fetching new tokens...");
+      const url = `${API_BASE_URL}/tokens/new`;
+      console.log("Calling API:", url);
+      const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const errorText = await response.text();
+        console.error("API Error Response:", errorText);
+        throw new Error(`API error: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
+      console.log("New tokens data:", data);
 
-      // Check for new tokens that we haven't seen before
-      const currentTokenIds = new Set(
-        newTokens.map((token) => token.tokenAddress)
-      );
-      const incomingTokens = data.result || [];
-
-      // Store previous token IDs
+      const incomingTokens = data || [];
       const previousTokenIds = new Set(newTokensIds);
 
-      // Update the set of known token IDs
       setNewTokensIds(
         new Set([
           ...previousTokenIds,
@@ -80,12 +73,10 @@ const PumpFunPage = () => {
         ])
       );
 
-      // Find new tokens that weren't in our previous list
       const brandNewTokens = incomingTokens.filter(
         (token) => !previousTokenIds.has(token.tokenAddress)
       );
 
-      // Add isNew flag to brand new tokens for animation
       const tokensWithFlag = incomingTokens.map((token) => ({
         ...token,
         isNew: brandNewTokens.some(
@@ -102,21 +93,20 @@ const PumpFunPage = () => {
 
   const fetchBondingTokens = async () => {
     try {
-      const url =
-        "https://solana-gateway.moralis.io/token/mainnet/exchange/pumpfun/bonding?limit=100";
-      const response = await fetch(url, {
-        headers: {
-          accept: "application/json",
-          "X-API-Key": API_KEY,
-        },
-      });
+      console.log("Fetching bonding tokens...");
+      const url = `${API_BASE_URL}/tokens/bonding`;
+      console.log("Calling API:", url);
+      const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const errorText = await response.text();
+        console.error("API Error Response:", errorText);
+        throw new Error(`API error: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
-      setBondingTokens(data.result || []);
+      console.log("Bonding tokens data:", data);
+      setBondingTokens(data || []);
     } catch (err) {
       console.error("Error fetching bonding tokens:", err);
       throw err;
@@ -125,21 +115,20 @@ const PumpFunPage = () => {
 
   const fetchGraduatedTokens = async () => {
     try {
-      const url =
-        "https://solana-gateway.moralis.io/token/mainnet/exchange/pumpfun/graduated?limit=100";
-      const response = await fetch(url, {
-        headers: {
-          accept: "application/json",
-          "X-API-Key": API_KEY,
-        },
-      });
+      console.log("Fetching graduated tokens...");
+      const url = `${API_BASE_URL}/tokens/graduated`;
+      console.log("Calling API:", url);
+      const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const errorText = await response.text();
+        console.error("API Error Response:", errorText);
+        throw new Error(`API error: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
-      setGraduatedTokens(data.result || []);
+      console.log("Graduated tokens data:", data);
+      setGraduatedTokens(data || []);
     } catch (err) {
       console.error("Error fetching graduated tokens:", err);
       throw err;
