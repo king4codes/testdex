@@ -4,7 +4,7 @@ import NewTokenCard from "../components/pumpfun/NewTokenCard";
 import BondingTokenCard from "../components/pumpfun/BondingTokenCard";
 import GraduatedTokenCard from "../components/pumpfun/GraduatedTokenCard";
 
-const API_BASE_URL = "https://api.pump.fun";
+const API_KEY = process.env.REACT_APP_MORALIS_API_KEY;
 
 const PumpFunPage = () => {
   const navigate = useNavigate();
@@ -50,9 +50,18 @@ const PumpFunPage = () => {
   const fetchNewTokens = async () => {
     try {
       console.log("Fetching new tokens...");
-      const url = `${API_BASE_URL}/tokens/new`;
+      if (!API_KEY) {
+        throw new Error("API key is not configured");
+      }
+
+      const url = "https://solana-gateway.moralis.io/token/mainnet/exchange/pumpfun/new?limit=100";
       console.log("Calling API:", url);
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+          "X-API-Key": API_KEY,
+        },
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -63,7 +72,7 @@ const PumpFunPage = () => {
       const data = await response.json();
       console.log("New tokens data:", data);
 
-      const incomingTokens = data || [];
+      const incomingTokens = data.result || [];
       const previousTokenIds = new Set(newTokensIds);
 
       setNewTokensIds(
@@ -94,9 +103,18 @@ const PumpFunPage = () => {
   const fetchBondingTokens = async () => {
     try {
       console.log("Fetching bonding tokens...");
-      const url = `${API_BASE_URL}/tokens/bonding`;
+      if (!API_KEY) {
+        throw new Error("API key is not configured");
+      }
+
+      const url = "https://solana-gateway.moralis.io/token/mainnet/exchange/pumpfun/bonding?limit=100";
       console.log("Calling API:", url);
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+          "X-API-Key": API_KEY,
+        },
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -106,7 +124,7 @@ const PumpFunPage = () => {
 
       const data = await response.json();
       console.log("Bonding tokens data:", data);
-      setBondingTokens(data || []);
+      setBondingTokens(data.result || []);
     } catch (err) {
       console.error("Error fetching bonding tokens:", err);
       throw err;
@@ -116,9 +134,18 @@ const PumpFunPage = () => {
   const fetchGraduatedTokens = async () => {
     try {
       console.log("Fetching graduated tokens...");
-      const url = `${API_BASE_URL}/tokens/graduated`;
+      if (!API_KEY) {
+        throw new Error("API key is not configured");
+      }
+
+      const url = "https://solana-gateway.moralis.io/token/mainnet/exchange/pumpfun/graduated?limit=100";
       console.log("Calling API:", url);
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+          "X-API-Key": API_KEY,
+        },
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -128,7 +155,7 @@ const PumpFunPage = () => {
 
       const data = await response.json();
       console.log("Graduated tokens data:", data);
-      setGraduatedTokens(data || []);
+      setGraduatedTokens(data.result || []);
     } catch (err) {
       console.error("Error fetching graduated tokens:", err);
       throw err;
