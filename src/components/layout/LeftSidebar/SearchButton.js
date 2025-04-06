@@ -2,14 +2,14 @@ import React from "react";
 
 const SearchButton = ({ openSearchModal }) => {
   return (
-    <div className="mt-4 mb-3">
-      <div
-        className="flex items-center bg-dex-bg-tertiary rounded p-2 cursor-pointer hover:bg-dex-bg-highlight transition-colors"
+    <div>
+      <button
+        className="rs-button w-full flex items-center justify-center"
         onClick={openSearchModal}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-dex-text-secondary mr-2"
+          className="h-5 w-5 mr-2"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -19,8 +19,8 @@ const SearchButton = ({ openSearchModal }) => {
             clipRule="evenodd"
           />
         </svg>
-        <span className="text-dex-text-secondary">Search</span>
-      </div>
+        <span>Search Grand Exchange</span>
+      </button>
     </div>
   );
 };

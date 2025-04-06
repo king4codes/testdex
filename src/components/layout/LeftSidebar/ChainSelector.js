@@ -8,18 +8,18 @@ const ChainSelector = () => {
 
   // Define the supported chains with their display names and IDs
   const CHAINS = [
-    { id: "solana", name: "Solana", icon: "☀️" },
-    { id: "0x1", name: "Ethereum", icon: "💎" },
-    { id: "0x38", name: "BSC", icon: "🔶" },
-    { id: "0x2105", name: "Base", icon: "🅱️" },
-    { id: "0xa4b1", name: "Arbitrum", icon: "🔵" },
-    { id: "0x89", name: "Polygon", icon: "🟣" },
-    { id: "0xa86a", name: "Avalanche", icon: "❄️" },
-    { id: "0xa", name: "Optimism", icon: "⚡" },
-    { id: "0xe708", name: "Linea", icon: "📈" },
-    { id: "0xfa", name: "Fantom", icon: "👻" },
-    { id: "0x171", name: "Pulse", icon: "💓" },
-    { id: "0x7e4", name: "Ronin", icon: "🦊" },
+    { id: "solana", name: "Varrock", icon: "🏰" },
+    { id: "0x1", name: "Lumbridge", icon: "🌳" },
+    { id: "0x38", name: "Al Kharid", icon: "🏜️" },
+    { id: "0x2105", name: "Falador", icon: "⚔️" },
+    { id: "0xa4b1", name: "Ardougne", icon: "🏪" },
+    { id: "0x89", name: "Catherby", icon: "🎣" },
+    { id: "0xa86a", name: "Seers Village", icon: "🔮" },
+    { id: "0xa", name: "Draynor", icon: "🌲" },
+    { id: "0xe708", name: "Edgeville", icon: "🗡️" },
+    { id: "0xfa", name: "Wilderness", icon: "💀" },
+    { id: "0x171", name: "Karamja", icon: "🌴" },
+    { id: "0x7e4", name: "Port Sarim", icon: "⚓" },
   ];
 
   // Map chain IDs to URL paths
@@ -52,26 +52,24 @@ const ChainSelector = () => {
   };
 
   return (
-    <div className="mt-6">
-      <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 px-4">
-        Networks
+    <div>
+      <h3 className="rs-header text-center mb-2">
+        Trading Posts
       </h3>
-      <nav className="space-y-px">
+      <div className="grid grid-cols-2 gap-2">
         {CHAINS.map((chain) => (
           <button
             key={chain.id}
             onClick={() => handleChainClick(chain.id)}
-            className={`flex items-center px-4 py-2 text-sm w-full text-left ${
-              selectedChain === chain.id
-                ? "bg-dex-bg-highlight"
-                : "hover:bg-dex-bg-tertiary"
-            } transition-colors`}
+            className={`rs-button flex flex-col items-center p-2 text-sm ${
+              selectedChain === chain.id ? "brightness-125" : ""
+            }`}
           >
-            <span className="mr-3 w-5 text-center">{chain.icon}</span>
-            {chain.name}
+            <span className="text-xl mb-1">{chain.icon}</span>
+            <span className="text-xs">{chain.name}</span>
           </button>
         ))}
-      </nav>
+      </div>
     </div>
   );
 };

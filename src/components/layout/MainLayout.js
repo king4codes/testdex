@@ -3,9 +3,11 @@ import LeftSidebar from "./LeftSidebar";
 
 const MainLayout = ({ children, openSearchModal }) => {
   return (
-    <div className="flex min-h-screen bg-dex-bg-primary text-dex-text-primary">
-      <LeftSidebar openSearchModal={openSearchModal} />
-      <main className="flex-1 flex flex-col">{children}</main>
+    <div className="flex min-h-screen">
+      <div className="rs-container" style={{ width: '250px' }}>
+        <LeftSidebar openSearchModal={openSearchModal} />
+      </div>
+      <main className="flex-1 flex flex-col p-4">{children}</main>
     </div>
   );
 };

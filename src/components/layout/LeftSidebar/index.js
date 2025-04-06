@@ -12,24 +12,30 @@ const LeftSidebar = ({ openSearchModal }) => {
   };
 
   return (
-    <div className="w-64 bg-dex-bg-secondary text-dex-text-primary flex flex-col border-r border-dex-border h-screen sticky top-0 overflow-y-auto">
+    <div className="h-screen sticky top-0 overflow-y-auto">
       <div className="p-4">
         <Link to="/" className="block">
-          <div className="flex flex-col">
+          <div className="rs-header mb-4">
             <div className="flex items-center space-x-2">
-              <span className="text-green-400 text-xl font-mono">
-                <span className="text-2xl">&#9002;</span>
+              <span className="text-rs-text text-xl font-bold">
+                <span className="text-2xl">🗡️</span>
               </span>
-              <span className="font-bold text-lg">DEX Terminal</span>
+              <span className="font-bold text-lg">Grand Exchange</span>
             </div>
-            <span className="text-xs text-gray-400 ml-7">
+            <span className="text-xs text-rs-text block mt-1">
               Powered by Moralis
             </span>
           </div>
         </Link>
-        <SearchButton openSearchModal={openSearchModal} />
-        <NavigationMenu />
-        <ChainSelector />
+        <div className="rs-container mb-4">
+          <SearchButton openSearchModal={openSearchModal} />
+        </div>
+        <div className="rs-container mb-4">
+          <NavigationMenu />
+        </div>
+        <div className="rs-container">
+          <ChainSelector />
+        </div>
       </div>
     </div>
   );
